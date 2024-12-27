@@ -30,4 +30,4 @@ QuickSight users will need to be granted access to the newly created assets. Dir
 
 ## Disclaimer
 
-This code was created for educational purposed and should be analyzed, modified and tested in your own environment prior to production use.
+This code was created for educational purposes and should be analyzed, modified and tested in your own environment prior to any production use.
