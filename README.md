@@ -8,7 +8,9 @@ This stack **<ins>must be</ins>** installed after CUDOS has been successfully de
 
 ## Installation
 
-Users should follow the directions in the [AWS CloudFormation User Guide](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html) to create a stack from the CloudFormation console using the [cur_resource_analyzer_cloudformation.json](https://github.com/jay-giametta/AWS-CUR-ResourceAnalyzer/blob/main/cloudformation/cur_resource_analyzer_cloudformation.json) file in this repository.
+[<img src="https://static.us-east-1.prod.workshops.aws/public/7049bac4-6e2b-4642-a834-f86cc8c523fd/static/LaunchStack.png">](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https%3A%2F%2Faws-cur-resourceanalyzer.s3.us-east-1.amazonaws.com%2Fcur_resource_analyzer_cloudformation.json&stackName=cur-resource-analyzer&param_CurAppNameCol=product_servicecode&param_CurDbName=cur&param_CurTableName=customer_all)
+
+Users should follow the directions in the [AWS CloudFormation User Guide](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html) to create a stack from the CloudFormation console using the [cur_resource_analyzer_cloudformation.json](cloudformation/cur_resource_analyzer_cloudformation.json) file in this repository.
 
 ## Parameters  
 
@@ -26,7 +28,7 @@ Groups in the analysis refer to account groups that are split by grouping linked
 QuickSight users will need to be granted access to the newly created assets. Directions for this process can be found in the [Amazon Quicksight User Guide - Managing assets](https://docs.aws.amazon.com/quicksight/latest/user/manage-qs-assets.html) section.
 
 ## Screenshots
-![screenshot](https://github.com/jay-giametta/AWS-CUR-ResourceAnalyzer/blob/main/images/resource_analyzer_1.jpg)
+![screenshot](images/resource_analyzer_1.jpg)
 
 ## Disclaimer
 
