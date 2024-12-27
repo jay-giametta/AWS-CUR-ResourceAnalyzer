@@ -1,4 +1,4 @@
-# AWS-CUR-ResourceAnalyzer  
+# AWS CUR Resource Analyzer  
 
 Amazon QuickSight resources to be used along with  [CUDOS Cloud Intelligence Dashboards](https://github.com/aws-samples/aws-cudos-framework-deployment) to analyze AWS Cost and Usage Reports.
 
