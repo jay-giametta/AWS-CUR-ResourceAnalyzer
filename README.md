@@ -23,6 +23,9 @@ Groups in the analysis refer to account groups that are split by grouping linked
 **QuickSight Permissions**  
 QuickSight users will need to be granted access to the newly created assets. Directions for this process can be found in the [Amazon Quicksight User Guide - Managing assets](https://docs.aws.amazon.com/quicksight/latest/user/manage-qs-assets.html) section.
 
+## Screenshots
+![screenshot](https://github.com/jay-giametta/AWS-CUR-ResourceAnalyzer/blob/main/images/resource_analyzer_1.jpg?raw=true)
+
 ## Disclaimer
 
 This code was created for educational purposed and should be analyzed, modified and tested in your own environment prior to production use.
