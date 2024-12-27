@@ -4,7 +4,7 @@ Amazon QuickSight resources to be used along with  [CUDOS Cloud Intelligence Das
 
 ## Dependencies  
 
-This stack <ins>must be</ins> installed after CUDOS has been successfully deployed. It depends on previously installed CUR data catalog information.
+This stack <ins>must be</ins> installed after CUDOS has been successfully deployed. It should be installed in the same account as CUDOS as it depends on previously installed CUR data catalog information.
 
 ## Installation
 
@@ -18,8 +18,10 @@ Users should follow the directions in the [AWS CloudFormation User Guide](https:
 
 ## Other Information
 **Account Groups**  
-
 Groups in the analysis refer to account groups that are created by grouping linked accounts that have similar names. The groupings depend on the presence of basic string delimeters and use the following QuickSight transform: ```toLower(split(replace({account_name},':','-'),'-',1))```.
+
+**QuickSight Permissions**  
+QuickSight users will need to be granted access to thew newly created assets. Directions for this process can be found in the [Amazon Quicksight User Guide - Managing assets](https://docs.aws.amazon.com/quicksight/latest/user/manage-qs-assets.html) section.
 
 ## Disclaimer
 
