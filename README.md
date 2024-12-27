@@ -16,7 +16,7 @@ Users should follow the directions in the [AWS CloudFormation User Guide](https:
 - **CurTableName** - The name of the CUR table. This information can be found in Athena.
 - **CurAppNameCol** - The name of the CUR column containing application name tag info. This information can be found in Athena. Leave as ```product_servicecode``` if app-level tagging is unavailable.
 
-**Note**: See the following AWS Workshop page for help with [Cost and Usage Analysis - SQL](https://catalog.workshops.aws/well-architected-cost-optimization/en-US/2-expenditure-and-usage-awareness/70-cost-and-usage-analysis-sql) in Athena.
+**Note**: See the following AWS Well-Architected Cost Optimization Workshop for help with [Cost and Usage Analysis - SQL](https://catalog.workshops.aws/well-architected-cost-optimization/en-US/2-expenditure-and-usage-awareness/70-cost-and-usage-analysis-sql) in Athena.
 
 ## Other Information
 **Account Groups**  
