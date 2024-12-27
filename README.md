@@ -21,7 +21,7 @@ Users should follow the directions in the [AWS CloudFormation User Guide](https:
 Groups in the analysis refer to account groups that are split by grouping linked accounts that have similar names. The groupings depend on the presence of basic string delimeters and use the following QuickSight transform: ```toLower(split(replace({account_name},':','-'),'-',1))```.
 
 **QuickSight Permissions**  
-QuickSight users will need to be granted access to thew newly created assets. Directions for this process can be found in the [Amazon Quicksight User Guide - Managing assets](https://docs.aws.amazon.com/quicksight/latest/user/manage-qs-assets.html) section.
+QuickSight users will need to be granted access to the newly created assets. Directions for this process can be found in the [Amazon Quicksight User Guide - Managing assets](https://docs.aws.amazon.com/quicksight/latest/user/manage-qs-assets.html) section.
 
 ## Disclaimer
 
