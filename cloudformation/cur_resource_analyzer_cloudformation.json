@@ -1,27 +1,22 @@
 {
     "AWSTemplateFormatVersion" : "2010-09-09",
-
-    "Parameters" : {
-            
+    "Parameters" : {        
         "CurDbName" : {
             "Description" : "Name of the CUR database in Athena",
             "Default" : "cur",
             "Type" : "String"
         },
-
         "CurTableName" : {
             "Description" : "Name of the CUR table in Athena",
             "Default" : "customer_all",
             "Type" : "String"
         },
-
         "CurAppNameCol" : {
             "Description" : "Name of the CUR column containing application name tag info in Athena. Leave as 'product_servicecode' if app-level tagging is unavailable.",
             "Default" : "product_servicecode",
             "Type" : "String"
         }
     },
-    
     "Resources" : {
         "CurDataSource" : {
             "Type" : "AWS::QuickSight::DataSource",       
@@ -32,7 +27,6 @@
                 "Type": "ATHENA"
             }
         },
-      
         "ResourceAnalyzerDataset" : {
             "Type" : "AWS::QuickSight::DataSet",
             "Properties" : {
@@ -41,48 +35,47 @@
                 "Name": "resource_analyzer",
                 "PhysicalTableMap": {
                     "27a95228-4998-4087-861f-3650b74505b8": {
-						"CustomSql": {
-							"DataSourceArn": {
-								"Fn::GetAtt": [
-									"CurDataSource",
-									"Arn"
-								]
-							},
-							"Name": "account_map",
-							"SqlQuery": {
-								"Fn::Join": [
-									"", [
-										"SELECT DISTINCT\r\n",
-										"  line_item_usage_account_id account_id\r\n",
-										", \"max_by\"(bill_payer_account_id, line_item_usage_start_date) parent_account_id\r\n",
-										", \"max_by\"(line_item_usage_account_id, line_item_usage_start_date) account_name\r\n",
-										", \"max_by\"(line_item_usage_account_id, line_item_usage_start_date) account_email_id\r\n",
-										"FROM \"", {"Ref" : "CurDbName"}, "\".\"", {"Ref" : "CurTableName"}, "\"\r\n",
-										"GROUP BY line_item_usage_account_id"
-									]
-								]
-							},
-							"Columns": [
-								{
-									"Name": "account_id",
-									"Type": "STRING"
-								},
-								{
-									"Name": "parent_account_id",
-									"Type": "STRING"
-								},
-								{
-									"Name": "account_name",
-									"Type": "STRING"
-								},
-
-								{
-									"Name": "account_email_id",
-									"Type": "STRING"
-								}
-							]
-						}
-					},
+                        "CustomSql": {
+                            "DataSourceArn": {
+                                "Fn::GetAtt": [
+                                    "CurDataSource",
+                                    "Arn"
+                                ]
+                            },
+                            "Name": "account_map",
+                            "SqlQuery": {
+                                "Fn::Join": [
+                                    "", [
+                                        "SELECT DISTINCT\r\n",
+                                        "  line_item_usage_account_id account_id\r\n",
+                                        ", \"max_by\"(bill_payer_account_id, line_item_usage_start_date) parent_account_id\r\n",
+                                        ", \"max_by\"(line_item_usage_account_id, line_item_usage_start_date) account_name\r\n",
+                                        ", \"max_by\"(line_item_usage_account_id, line_item_usage_start_date) account_email_id\r\n",
+                                        "FROM \"", {"Ref" : "CurDbName"}, "\".\"", {"Ref" : "CurTableName"}, "\"\r\n",
+                                        "GROUP BY line_item_usage_account_id"
+                                    ]
+                                ]
+                            },
+                            "Columns": [
+                                {
+                                    "Name": "account_id",
+                                    "Type": "STRING"
+                                },
+                                {
+                                    "Name": "parent_account_id",
+                                    "Type": "STRING"
+                                },
+                                {
+                                    "Name": "account_name",
+                                    "Type": "STRING"
+                                },
+                                {
+                                    "Name": "account_email_id",
+                                    "Type": "STRING"
+                                }
+                            ]
+                        }
+                    },
                     "69414d5d-7810-48cc-baa7-b10d39b18dce": {
                         "CustomSql": {
                             "DataSourceArn": {
@@ -93,48 +86,48 @@
                             },
                             "Name": "resource_analyzer",
                             "SqlQuery": {
-								"Fn::Join": [
-									"", [
-										"SELECT DISTINCT",
-										"  \"date_trunc\"('day', \"line_item_usage_start_date\") \"usage_date\"\r\n",
-										", \"bill_payer_account_id\" \"payer_account_id\"\r\n",
-										", \"line_item_usage_account_id\" \"linked_account_id\"\r\n",
-										", \"", {"Ref" : "CurAppNameCol"}, "\" \"application_name\"\r\n",
-										", \"bill_billing_entity\" \"billing_entity\"\r\n",
-										", \"product_servicename\" \"product_name\"\r\n",
-										", \"line_item_resource_id\" \"resource_id\"\r\n",
-										", \"line_item_product_code\" \"product_code\"\r\n",
-										", \"line_item_operation\" \"operation\"\r\n",
-										", \"line_item_line_item_type\" \"charge_type\"\r\n",
-										", \"line_item_usage_type\" \"usage_type\"\r\n",
-										", \"pricing_unit\" \"pricing_unit\"\r\n",
-										", \"product_region\" \"region\"\r\n",
-										", \"line_item_line_item_description\" \"item_description\"\r\n",
-										", \"line_item_legal_entity\" \"legal_entity\"\r\n",
-										", \"pricing_term\" \"pricing_term\"\r\n",
-										", \"product_database_engine\" \"database_engine\"\r\n",
-										", \"product_deployment_option\" \"product_deployment_option\"\r\n",
-										", \"product_from_location\" \"product_from_location\"\r\n",
-										", \"product_group\" \"product_group\"\r\n",
-										", \"product_instance_type\" \"instance_type\"\r\n",
-										", \"product_instance_type_family\" \"instance_type_family\"\r\n",
-										", \"product_operating_system\" \"platform\"\r\n",
-										", \"product_product_family\" \"product_family\"\r\n",
-										", \"product_servicecode\" \"service\"\r\n",
-										", \"product_storage\" \"product_storage\"\r\n",
-										", \"product_to_location\" \"product_to_location\"\r\n",
-										", \"product_volume_api_name\" \"product_volume_api_name\"\r\n",
-										", \"savings_plan_savings_plan_a_r_n\" \"savings_plan_a_r_n\"\r\n",
-										", \"sum\"(\"savings_plan_savings_plan_effective_cost\") savings_plan_effective_cost\r\n",
-										", \"sum\"(\"reservation_effective_cost\") reservation_effective_cost",
-										", \"sum\"(\"line_item_usage_amount\") usage_quantity\r\n",
-										", \"sum\"(\"line_item_unblended_cost\") unblended_cost\r\n",
-										"FROM \"", {"Ref" : "CurDbName"}, "\".\"", {"Ref" : "CurTableName"}, "\"\r\n",
-										"WHERE (((current_date - INTERVAL  '30' DAY) <= line_item_usage_start_date) AND (line_item_resource_id <> ''))\r\n",
-										"GROUP BY 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29"
-									]
-								]
-							},
+                                "Fn::Join": [
+                                    "", [
+                                        "SELECT DISTINCT",
+                                        "  \"date_trunc\"('day', \"line_item_usage_start_date\") \"usage_date\"\r\n",
+                                        ", \"bill_payer_account_id\" \"payer_account_id\"\r\n",
+                                        ", \"line_item_usage_account_id\" \"linked_account_id\"\r\n",
+                                        ", \"", {"Ref" : "CurAppNameCol"}, "\" \"application_name\"\r\n",
+                                        ", \"bill_billing_entity\" \"billing_entity\"\r\n",
+                                        ", \"product_servicename\" \"product_name\"\r\n",
+                                        ", \"line_item_resource_id\" \"resource_id\"\r\n",
+                                        ", \"line_item_product_code\" \"product_code\"\r\n",
+                                        ", \"line_item_operation\" \"operation\"\r\n",
+                                        ", \"line_item_line_item_type\" \"charge_type\"\r\n",
+                                        ", \"line_item_usage_type\" \"usage_type\"\r\n",
+                                        ", \"pricing_unit\" \"pricing_unit\"\r\n",
+                                        ", \"product_region\" \"region\"\r\n",
+                                        ", \"line_item_line_item_description\" \"item_description\"\r\n",
+                                        ", \"line_item_legal_entity\" \"legal_entity\"\r\n",
+                                        ", \"pricing_term\" \"pricing_term\"\r\n",
+                                        ", \"product_database_engine\" \"database_engine\"\r\n",
+                                        ", \"product_deployment_option\" \"product_deployment_option\"\r\n",
+                                        ", \"product_from_location\" \"product_from_location\"\r\n",
+                                        ", \"product_group\" \"product_group\"\r\n",
+                                        ", \"product_instance_type\" \"instance_type\"\r\n",
+                                        ", \"product_instance_type_family\" \"instance_type_family\"\r\n",
+                                        ", \"product_operating_system\" \"platform\"\r\n",
+                                        ", \"product_product_family\" \"product_family\"\r\n",
+                                        ", \"product_servicecode\" \"service\"\r\n",
+                                        ", \"product_storage\" \"product_storage\"\r\n",
+                                        ", \"product_to_location\" \"product_to_location\"\r\n",
+                                        ", \"product_volume_api_name\" \"product_volume_api_name\"\r\n",
+                                        ", \"savings_plan_savings_plan_a_r_n\" \"savings_plan_a_r_n\"\r\n",
+                                        ", \"sum\"(\"savings_plan_savings_plan_effective_cost\") savings_plan_effective_cost\r\n",
+                                        ", \"sum\"(\"reservation_effective_cost\") reservation_effective_cost",
+                                        ", \"sum\"(\"line_item_usage_amount\") usage_quantity\r\n",
+                                        ", \"sum\"(\"line_item_unblended_cost\") unblended_cost\r\n",
+                                        "FROM \"", {"Ref" : "CurDbName"}, "\".\"", {"Ref" : "CurTableName"}, "\"\r\n",
+                                        "WHERE (((current_date - INTERVAL  '30' DAY) <= line_item_usage_start_date) AND (line_item_resource_id <> ''))\r\n",
+                                        "GROUP BY 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29"
+                                    ]
+                                ]
+                            },
                             "Columns": [
                                 {
                                     "Name": "usage_date",
@@ -292,7 +285,7 @@
                                         "GROUP BY ", {"Ref" : "CurAppNameCol"}
                                     ]
                                 ]
-                            }                            ,
+                            },
                             "Columns": [
                                 {
                                     "Name": {"Ref" : "CurAppNameCol"},
@@ -341,7 +334,7 @@
                                 } 
                             }
                         }
-                    },            
+                    },
                     "7a8669d3-c4f7-448b-b969-e01b80bd1d17": {
                         "Alias": "intermediate_table_2",
                         "DataTransforms": [
@@ -362,7 +355,7 @@
                                         {
                                             "ColumnName": "resource_id_short",
                                             "ColumnId": "b22ec250-8415-4eaf-85be-b382006fdcf9",
-                                            "Expression": "split(\r\n    replace({resource_id}, ':' ,'/'),\r\n    '/',\r\n    strlen({resource_id})-strlen(replace(replace({resource_id}, ':' ,'/'), '/' ,'')) + 1\r\n)"
+                                            "Expression": "split(replace({resource_id}, ':' ,'/'),'/',strlen({resource_id})-strlen(replace(replace({resource_id}, ':' ,'/'), '/' ,'')) + 1)"
                                         }
                                     ]
                                 }
@@ -437,7 +430,6 @@
                 "ImportMode": "SPICE"
             }
         },
-
         "ResourceViewAnalysis" : {
             "Type" : "AWS::QuickSight::Analysis",
             "Properties" : {
@@ -3179,8 +3171,8 @@
                     "QueryExecutionOptions": {
                         "QueryExecutionMode": "AUTO"
                     }
+                }
             }
         }
-        }
-  }
+    }
 }
