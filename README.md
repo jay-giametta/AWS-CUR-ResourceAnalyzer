@@ -12,13 +12,13 @@ Users should follow the directions in the [AWS CloudFormation User Guide](https:
 ## Parameters  
 - **CurDbName** - The name of the CUR database. This information can be found in Athena.
 - **CurTableName** - The name of the CUR table. This information can be found in Athena.
-- **CurAppNameCol** - The name of the CUR column containing application name tag info. This information can be found in Athena. Leave as ```product_servicecode``` if app-level tagging is unavailable.
+- **CurAppNameCol** - The name of the CUR column containing application name tag info. This information can be found in Athena. Leave as```product_servicecode```if app-level [tagging](https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html) is unavailable.
 
 **Note**: See the following AWS Well-Architected Cost Optimization Workshop for help with [Cost and Usage Analysis - SQL](https://catalog.workshops.aws/well-architected-cost-optimization/en-US/2-expenditure-and-usage-awareness/70-cost-and-usage-analysis-sql) in Athena.
 
 ## Other Information
 **Account Groups**  
-Groups in the analysis refer to account groups that are split by grouping linked accounts that have similar names. The groupings depend on the presence of basic string delimeters and use the following [QuickSight function](https://docs.aws.amazon.com/quicksight/latest/user/toLower-function.html): ```toLower(split(replace({account_name},':','-'),'-',1))```.
+Groups in the analysis refer to account groups that are split by grouping linked accounts that have similar names. The groupings depend on the presence of basic string delimeters and use the following [QuickSight function](https://docs.aws.amazon.com/quicksight/latest/user/toLower-function.html):```toLower(split(replace({account_name},':','-'),'-',1))```.
 
 **QuickSight Permissions**  
 QuickSight users will need to be granted access to the newly created assets. Directions for this process can be found in the [Amazon Quicksight User Guide - Managing assets](https://docs.aws.amazon.com/quicksight/latest/user/manage-qs-assets.html) section.
