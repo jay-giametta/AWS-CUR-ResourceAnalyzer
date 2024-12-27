@@ -14,7 +14,7 @@ Users should follow the directions in the [AWS CloudFormation User Guide](https:
 
 - **CurDbName** - The name of the CUR database. This information can be found in Athena.
 - **CurTableName** - The name of the CUR table. This information can be found in Athena.
-- **CurAppNameCol** - The name of the CUR column containing application name tag info. This information can be found in Athena. Leave as 'product_servicecode' if app-level tagging is unavailable.
+- **CurAppNameCol** - The name of the CUR column containing application name tag info. This information can be found in Athena. Leave as ```product_servicecode``` if app-level tagging is unavailable.
 
 ## Other Information
 **Account Groups**  
