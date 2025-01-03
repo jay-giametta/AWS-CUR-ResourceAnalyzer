@@ -23,16 +23,16 @@ Users should follow the directions in the [AWS CloudFormation User Guide](https:
 
 ### Resources
 
-#### 1. CurDataSource (AWS::QuickSight::DataSource)
+#### CurDataSource (AWS::QuickSight::DataSource)
 - Creates a QuickSight data source connected to Athena
 
-#### 2. ResourceAnalyzerDataset (AWS::QuickSight::DataSet)
+#### ResourceAnalyzerDataset (AWS::QuickSight::DataSet)
 Creates a dataset with three main SQL queries:
 - `account_map`: Maps account IDs to account names and parent accounts
 - `resource_analyzer`: Main query extracting cost and usage data
 - `app_first_seen`: Tracks when applications were first seen in billing data
 
-#### 3. ResourceViewAnalysis (AWS::QuickSight::Analysis)
+#### ResourceViewAnalysis (AWS::QuickSight::Analysis)
 Creates a QuickSight analysis with two sheets:
 
 ##### Sheet 1: "Application Info"
