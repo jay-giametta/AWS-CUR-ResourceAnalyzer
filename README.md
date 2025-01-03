@@ -9,7 +9,7 @@ Users should follow the directions in the [AWS CloudFormation User Guide](https:
 
 [<img src="https://static.us-east-1.prod.workshops.aws/public/7049bac4-6e2b-4642-a834-f86cc8c523fd/static/LaunchStack.png" width="175">](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https%3A%2F%2Faws-cur-resourceanalyzer.s3.us-east-1.amazonaws.com%2Fcur_resource_analyzer_cloudformation.json&stackName=cur-resource-analyzer&param_CurAppNameCol=product_servicecode&param_CurDbName=cur&param_CurTableName=customer_all)
 
-## CloudFormation Template Details
+## CloudFormation
 
 ### Parameters
 
