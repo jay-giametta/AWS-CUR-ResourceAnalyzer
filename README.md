@@ -9,12 +9,59 @@ Users should follow the directions in the [AWS CloudFormation User Guide](https:
 
 [<img src="https://static.us-east-1.prod.workshops.aws/public/7049bac4-6e2b-4642-a834-f86cc8c523fd/static/LaunchStack.png" width="175">](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https%3A%2F%2Faws-cur-resourceanalyzer.s3.us-east-1.amazonaws.com%2Fcur_resource_analyzer_cloudformation.json&stackName=cur-resource-analyzer&param_CurAppNameCol=product_servicecode&param_CurDbName=cur&param_CurTableName=customer_all)
 
-## Parameters  
-- **CurDbName** - The name of the CUR database. This information can be found in Athena.
-- **CurTableName** - The name of the CUR table. This information can be found in Athena.
-- **CurAppNameCol** - The name of the CUR column containing application name tag info. This information can be found in Athena. Leave as```product_servicecode```if app-level [tagging](https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html) is unavailable.
+## CloudFormation Template Details
+
+### Parameters
+
+| Parameter | Description | Default |
+|-----------|-------------|---------|
+| `CurDbName` | The name of the CUR database. This information can be found in Athena. | "cur" |
+| `CurTableName` | The name of the CUR table. This information can be found in Athena. | "customer_all" |
+| `CurAppNameCol` | The name of the CUR column containing application name tag info. This information can be found in Athena. Leave as```product_servicecode```if app-level [tagging](https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html) is unavailable. | "product_servicecode" |
 
 **Note**: See the following AWS Well-Architected Cost Optimization Workshop for help with [Cost and Usage Analysis - SQL](https://catalog.workshops.aws/well-architected-cost-optimization/en-US/2-expenditure-and-usage-awareness/70-cost-and-usage-analysis-sql) in Athena.
+
+### Resources
+
+#### 1. CurDataSource (AWS::QuickSight::DataSource)
+- Creates a QuickSight data source connected to Athena
+
+#### 2. ResourceAnalyzerDataset (AWS::QuickSight::DataSet)
+Creates a dataset with three main SQL queries:
+- `account_map`: Maps account IDs to account names and parent accounts
+- `resource_analyzer`: Main query extracting cost and usage data
+- `app_first_seen`: Tracks when applications were first seen in billing data
+
+#### 3. ResourceViewAnalysis (AWS::QuickSight::Analysis)
+Creates a QuickSight analysis with two sheets:
+
+##### Sheet 1: "Application Info"
+Shows cost distribution by application. Includes visualizations for:
+- Costs by date first seen
+- 30-day costs by application
+- 30-day costs by group
+- Cost details in a pivot table
+- Application dates
+- Number of apps by date first seen
+
+##### Sheet 2: "AWS Product/Resource Info"
+Shows detailed AWS product and resource information. Includes visualizations for:
+- 30-day costs by operation
+- 30-day costs by product family
+- AWS product/resource costs in a detailed pivot table
+
+### Features
+
+- Interactive filtering capabilities
+- Parameter controls for:
+  - Application
+  - Operation
+  - Product family
+  - Account group
+- Date range filtering
+- Drill-down capabilities
+- Currency formatting
+- Customized layouts and visual settings
 
 ## Other Information
 **Account Groups**  
